@@ -9,7 +9,7 @@ Based on [akrabat's slim3-skeleton](https://github.com/akrabat/slim3-skeleton).
 CREATE TABLE IF NOT EXISTS `notes` (
 `id` int(11) NOT NULL,
   `text` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
 ALTER TABLE `notes`
@@ -17,5 +17,5 @@ ALTER TABLE `notes`
 
 
 ALTER TABLE `notes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 ```
