@@ -7,15 +7,29 @@ use PDO;
 
 class NoteRepository
 {
+    /**
+     * @var \Psr\Log\LoggerInterface
+     */
     private $logger;
+
+    /**
+     * @var \PDO
+     */
     private $pdo;
 
+    /**
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param \PDO                     $pdo
+     */
     public function __construct(LoggerInterface $logger, PDO $pdo)
     {
         $this->logger = $logger;
         $this->pdo = $pdo;
     }
 
+    /**
+     * @return array
+     */
     public function getAllNotes()
     {
         $this->logger->info('NoteRpository: get all notes');
@@ -30,6 +44,10 @@ class NoteRepository
         return $result;
     }
 
+    /**
+     * @param int $id
+     * @return bool|array
+     */
     public function getNote($id)
     {
         $this->logger->info('NoteRepository: get note');
@@ -45,6 +63,10 @@ class NoteRepository
         return false;
     }
 
+    /**
+     * @param int $id
+     * @return bool
+     */
     public function deleteNote($id)
     {
         $this->logger->info('NoteRepository: delete note');
