@@ -1,14 +1,18 @@
 {
-    "name": "akrabat/slim3-skeleton",
-    "description": "Simple Slim Framework 3 skeleton with Twig & Monolog.",
+    "name": "moritz-h/slim3-rest-skeleton",
+    "description": "Simple Slim Framework 3 skeleton for REST API.",
     "license": "BSD-3-Clause",
     "type": "project",
-    "keywords": ["slim-framework", "skeleton"],
+    "keywords": ["slim-framework", "skeleton", "rest"],
     "authors": [
         {
             "name": "Rob Allen",
             "email": "rob@akrabat.com",
             "homepage": "http://akrabat.com"
+        },
+        {
+            "name": "Moritz Heinemann",
+            "email": "mo@blog-srv.net"
         }
     ],
     "autoload": {
@@ -18,8 +22,6 @@
     },
     "require": {
         "slim/slim": "^3.0@beta",
-        "slim/twig-view": "^1.1",
-        "slim/flash": "^0.1.0",
         "monolog/monolog": "^1.13"
     }
 }
