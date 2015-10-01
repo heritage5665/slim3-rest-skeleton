@@ -3,7 +3,7 @@
 return [
     'settings' => [
         // database settings
-        'database' => [
+        'pdo' => [
             'dsn' => 'mysql:host=localhost;dbname=notes',
             'username' => 'notes',
             'password' => 'notes',

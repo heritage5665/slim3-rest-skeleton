@@ -1,18 +1,25 @@
 <?php
 
-namespace App;
+namespace App\Repository;
 
-class Database
+use Psr\Log\LoggerInterface;
+use PDO;
+
+class NoteRepository
 {
+    private $logger;
     private $pdo;
 
-    public function __construct($settings)
+    public function __construct(LoggerInterface $logger, PDO $pdo)
     {
-        $this->pdo = new \PDO($settings['dsn'], $settings['username'], $settings['password']);
+        $this->logger = $logger;
+        $this->pdo = $pdo;
     }
 
     public function getAllNotes()
     {
+        $this->logger->info('NoteRpository: get all notes');
+
         $stmt = $this->pdo->prepare('SELECT * FROM notes ORDER BY id ASC');
         $stmt->execute();
         $result = array();
@@ -25,6 +32,8 @@ class Database
 
     public function getNote($id)
     {
+        $this->logger->info('NoteRepository: get note');
+
         $stmt = $this->pdo->prepare('SELECT * FROM notes WHERE id = :id');
         $id = (int) $id;
         $stmt->bindParam(':id', $id);
@@ -36,17 +45,10 @@ class Database
         return false;
     }
 
-    public function addNote($text)
-    {
-        $stmt = $this->pdo->prepare('INSERT INTO notes (text) VALUES (:text)');
-        $stmt->bindParam(':text', $text);
-        $stmt->execute();
-
-        return $this->pdo->lastInsertId();
-    }
-
     public function deleteNote($id)
     {
+        $this->logger->info('NoteRepository: delete note');
+
         $stmt = $this->pdo->prepare('DELETE FROM notes WHERE id = :id');
         $id = (int) $id;
         $stmt->bindParam(':id', $id);

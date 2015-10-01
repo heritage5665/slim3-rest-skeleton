@@ -1,18 +1,17 @@
 <?php
 
+use App\Action\HomeAction;
+use App\Action\NotesAction;
+
 // Routes
 
-$app->get('/', App\Action\HomeAction::class.':dispatch')
+$app->get('/', HomeAction::class.':dispatch')
     ->setName('homepage');
 
-$app->get('/notes', App\Action\NotesAction::class.':getAllNotes')
-    ->setName('homepage');
+$app->get('/notes', NotesAction::class.':getAllNotes');
 
-$app->get('/notes/{id:[0-9]+}', App\Action\NotesAction::class.':getNote')
-    ->setName('homepage');
+$app->get('/notes/{id:[0-9]+}', NotesAction::class.':getNote');
 
-$app->post('/notes', App\Action\NotesAction::class.':addNote')
-    ->setName('homepage');
+$app->post('/notes', NotesAction::class.':addNote');
 
-$app->delete('/notes/{id:[0-9]+}', App\Action\NotesAction::class.':deleteNote')
-    ->setName('homepage');
+$app->delete('/notes/{id:[0-9]+}', NotesAction::class.':deleteNote');

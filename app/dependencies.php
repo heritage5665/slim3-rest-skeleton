@@ -1,23 +1,12 @@
 <?php
 
-// DIC configuration
+use App\Database;
+use App\Factory\NoteFactory;
+use App\Repository\NoteRepository;
+use App\Action\HomeAction;
+use App\Action\NotesAction;
 
 $container = $app->getContainer();
-
-// -----------------------------------------------------------------------------
-// Service providers
-// -----------------------------------------------------------------------------
-
-// Database
-$container['database'] = function ($c) {
-    $settings = $c->get('settings');
-
-    return new App\Database($settings['database']);
-};
-
-// -----------------------------------------------------------------------------
-// Service factories
-// -----------------------------------------------------------------------------
 
 // monolog
 $container['logger'] = function ($c) {
@@ -29,14 +18,25 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-// -----------------------------------------------------------------------------
-// Action factories
-// -----------------------------------------------------------------------------
+// Database
+$container['pdo'] = function ($c) {
+    $settings = $c->get('settings')['pdo'];
+
+    return new PDO($settings['dsn'], $settings['username'], $settings['password']);
+};
+
+$container['App\Factory\NoteFactory'] = function ($c) {
+    return new NoteFactory($c->get('logger'), $c->get('pdo'));
+};
+
+$container['App\Repository\NoteRepository'] = function ($c) {
+    return new NoteRepository($c->get('logger'), $c->get('pdo'));
+};
 
 $container['App\Action\HomeAction'] = function ($c) {
-    return new App\Action\HomeAction($c->get('logger'));
+    return new HomeAction($c->get('logger'));
 };
 
 $container['App\Action\NotesAction'] = function ($c) {
-    return new App\Action\NotesAction($c->get('database'), $c->get('logger'));
+    return new NotesAction($c->get('logger'), $c->get('App\Factory\NoteFactory'), $c->get('App\Repository\NoteRepository'));
 };
