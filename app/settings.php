@@ -4,7 +4,7 @@ return [
     'settings' => [
         // database settings
         'pdo' => [
-            'dsn' => 'mysql:host=localhost;dbname=notes',
+            'dsn' => 'mysql:host=localhost;dbname=notes;charset=utf8',
             'username' => 'notes',
             'password' => 'notes',
         ],
