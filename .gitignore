@@ -1,5 +1,2 @@
 vendor/
-log/*
-cache/*
 composer.phar
-
