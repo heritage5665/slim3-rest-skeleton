@@ -3,8 +3,8 @@
 namespace App\Action;
 
 use Psr\Log\LoggerInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 
 /**
  * Class HomeAction
@@ -21,7 +21,8 @@ final class HomeAction
 
     /**
      * @param \Psr\Log\LoggerInterface $logger
-     */    public function __construct(LoggerInterface $logger)
+     */
+    public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
     }
@@ -32,7 +33,7 @@ final class HomeAction
      * @param array                                    $args
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function dispatch(ServerRequestInterface $request, ResponseInterface $response, $args)
+    public function dispatch(Request $request, Response $response, $args)
     {
         $this->logger->info('Home page action dispatched');
 

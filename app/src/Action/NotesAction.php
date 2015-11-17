@@ -3,8 +3,8 @@
 namespace App\Action;
 
 use Psr\Log\LoggerInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
 
@@ -48,7 +48,7 @@ final class NotesAction
      * @param array                                    $args
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function addNote(ServerRequestInterface $request, ResponseInterface $response, $args)
+    public function addNote(Request $request, Response $response, $args)
     {
         $this->logger->info('NotesAction: add note');
 
@@ -64,7 +64,7 @@ final class NotesAction
      * @param array                                    $args
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getAllNotes(ServerRequestInterface $request, ResponseInterface $response, $args)
+    public function getAllNotes(Request $request, Response $response, $args)
     {
         $this->logger->info('NotesAction: get all notes');
 
@@ -79,7 +79,7 @@ final class NotesAction
      * @param array                                    $args
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function getNote(ServerRequestInterface $request, ResponseInterface $response, $args)
+    public function getNote(Request $request, Response $response, $args)
     {
         $this->logger->info('NotesAction: get note');
 
@@ -99,7 +99,7 @@ final class NotesAction
      * @param array                                    $args
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function deleteNote(ServerRequestInterface $request, ResponseInterface $response, $args)
+    public function deleteNote(Request $request, Response $response, $args)
     {
         $this->logger->info('NotesAction: note deleted');
 
