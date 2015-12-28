@@ -53,6 +53,9 @@ class Note implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return get_object_vars($this);
+        return [
+            'id' => $this->id,
+            'text' => $this->text,
+        ];
     }
 }

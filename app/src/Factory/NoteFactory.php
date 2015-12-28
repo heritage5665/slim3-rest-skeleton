@@ -37,9 +37,9 @@ class NoteFactory
      * @param $text
      * @return \App\Object\Note
      */
-    public function create($text)
+    public function createNewNote($text)
     {
-        $this->logger->info('NoteFactory: create note');
+        $this->logger->info('NoteFactory: create new note');
 
         $stmt = $this->pdo->prepare('INSERT INTO notes (text) VALUES (:text)');
         $stmt->bindParam(':text', $text);
