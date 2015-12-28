@@ -9,9 +9,7 @@ use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
 
 /**
- * Class NotesAction
- *
- * @package App\Action
+ * Class NotesAction.
  */
 final class NotesAction
 {
@@ -19,12 +17,12 @@ final class NotesAction
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
-    
+
     /**
      * @var \App\Factory\NoteFactory
      */
     private $factory;
-    
+
     /**
      * @var \App\Repository\NoteRepository
      */
@@ -46,6 +44,7 @@ final class NotesAction
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface      $response
      * @param array                                    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function addNote(Request $request, Response $response, $args)
@@ -66,6 +65,7 @@ final class NotesAction
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface      $response
      * @param array                                    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getAllNotes(Request $request, Response $response, $args)
@@ -81,6 +81,7 @@ final class NotesAction
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface      $response
      * @param array                                    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function getNote(Request $request, Response $response, $args)
@@ -101,6 +102,7 @@ final class NotesAction
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface      $response
      * @param array                                    $args
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function deleteNote(Request $request, Response $response, $args)

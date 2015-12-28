@@ -6,6 +6,9 @@ use App\Object\Note;
 use Psr\Log\LoggerInterface;
 use PDO;
 
+/**
+ * Class NoteRepository.
+ */
 class NoteRepository
 {
     /**
@@ -47,6 +50,7 @@ class NoteRepository
 
     /**
      * @param int $id
+     *
      * @return bool|\App\Object\Note
      */
     public function getNote($id)
@@ -66,6 +70,7 @@ class NoteRepository
 
     /**
      * @param int $id
+     *
      * @return bool
      */
     public function deleteNote($id)

@@ -7,9 +7,7 @@ use Psr\Log\LoggerInterface;
 use PDO;
 
 /**
- * Class NoteFactory
- *
- * @package App\Factory
+ * Class NoteFactory.
  */
 class NoteFactory
 {
@@ -34,14 +32,15 @@ class NoteFactory
     }
 
     /**
-     * @param array             $request_data
+     * @param array $request_data
+     *
      * @return bool|\App\Object\Note
      */
     public function createNewNote($request_data)
     {
         $this->logger->info('NoteFactory: create new note');
 
-        if ($request_data == NULL || ! isset($request_data['text'])) {
+        if ($request_data == null || !isset($request_data['text'])) {
             return false;
         }
 

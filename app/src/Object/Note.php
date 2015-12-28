@@ -3,9 +3,7 @@
 namespace App\Object;
 
 /**
- * Class Note
- *
- * @package App\Object
+ * Class Note.
  */
 class Note implements \JsonSerializable
 {
@@ -20,8 +18,8 @@ class Note implements \JsonSerializable
     private $text;
 
     /**
-     * @param int     $id
-     * @param string  $text
+     * @param int    $id
+     * @param string $text
      */
     public function __construct($id, $text)
     {
