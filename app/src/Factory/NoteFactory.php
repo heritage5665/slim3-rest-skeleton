@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Object\Note;
 use Psr\Log\LoggerInterface;
 use PDO;
 
@@ -15,7 +16,7 @@ class NoteFactory
     /**
      * @var \Psr\Log\LoggerInterface
      */
-	private $logger;
+    private $logger;
 
     /**
      * @var \PDO
@@ -34,7 +35,7 @@ class NoteFactory
 
     /**
      * @param $text
-     * @return int|string
+     * @return \App\Object\Note
      */
     public function create($text)
     {
@@ -44,6 +45,6 @@ class NoteFactory
         $stmt->bindParam(':text', $text);
         $stmt->execute();
 
-        return $this->pdo->lastInsertId();
+        return new Note($this->pdo->lastInsertId(), $text);
     }
 }

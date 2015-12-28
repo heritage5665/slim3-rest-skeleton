@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Object\Note;
 use Psr\Log\LoggerInterface;
 use PDO;
 
@@ -28,7 +29,7 @@ class NoteRepository
     }
 
     /**
-     * @return array
+     * @return array (of \App\Object\Note)
      */
     public function getAllNotes()
     {
@@ -38,7 +39,7 @@ class NoteRepository
         $stmt->execute();
         $result = array();
         while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $result[] = $row;
+            $result[] = new Note($row['id'], $row['text']);
         }
 
         return $result;
@@ -46,7 +47,7 @@ class NoteRepository
 
     /**
      * @param int $id
-     * @return bool|array
+     * @return bool|\App\Object\Note
      */
     public function getNote($id)
     {
@@ -57,7 +58,7 @@ class NoteRepository
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         if ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            return $row;
+            return new Note($row['id'], $row['text']);
         }
 
         return false;

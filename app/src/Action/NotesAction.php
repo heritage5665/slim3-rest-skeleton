@@ -52,8 +52,8 @@ final class NotesAction
     {
         $this->logger->info('NotesAction: add note');
 
-        $new_id = $this->factory->create($request->getBody());
-        $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_id);
+        $new_note = $this->factory->create($request->getBody());
+        $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_note->getId());
 
         return $response;
     }
