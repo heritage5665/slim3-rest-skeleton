@@ -52,7 +52,7 @@ final class NotesAction
     {
         $this->logger->info('NotesAction: add note');
 
-        $new_note = $this->factory->create($request->getBody());
+        $new_note = $this->factory->createNewNote($request->getBody());
         $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_note->getId());
 
         return $response;
