@@ -2,9 +2,6 @@
 
 namespace App\Object;
 
-use Psr\Log\LoggerInterface;
-use PDO;
-
 /**
  * Class Note
  *
