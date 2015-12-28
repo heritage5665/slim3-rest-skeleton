@@ -52,8 +52,12 @@ final class NotesAction
     {
         $this->logger->info('NotesAction: add note');
 
-        $new_note = $this->factory->createNewNote($request->getBody());
-        $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_note->getId());
+        $new_note = $this->factory->createNewNote($request->getParsedBody());
+        if ($new_note !== false) {
+            $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_note->getId());
+        } else {
+            $response = $response->withStatus(400)->withHeader('Content-Type', 'application/json')->write(json_encode('400 Bad Request'));
+        }
 
         return $response;
     }

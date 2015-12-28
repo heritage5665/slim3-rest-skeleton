@@ -34,17 +34,21 @@ class NoteFactory
     }
 
     /**
-     * @param $text
-     * @return \App\Object\Note
+     * @param array             $request_data
+     * @return bool|\App\Object\Note
      */
-    public function createNewNote($text)
+    public function createNewNote($request_data)
     {
         $this->logger->info('NoteFactory: create new note');
 
+        if ($request_data == NULL || ! isset($request_data['text'])) {
+            return false;
+        }
+
         $stmt = $this->pdo->prepare('INSERT INTO notes (text) VALUES (:text)');
-        $stmt->bindParam(':text', $text);
+        $stmt->bindParam(':text', $request_data['text']);
         $stmt->execute();
 
-        return new Note($this->pdo->lastInsertId(), $text);
+        return new Note($this->pdo->lastInsertId(), $request_data['text']);
     }
 }
