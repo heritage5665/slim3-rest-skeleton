@@ -53,7 +53,7 @@ final class NotesAction
 
         $new_note = $this->factory->createNewNote($request->getParsedBody());
         if ($new_note !== false) {
-            $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_note->getId());
+            $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_note->getId())->write(json_encode('201 Created'));
         } else {
             $response = $response->withStatus(400)->withHeader('Content-Type', 'application/json')->write(json_encode('400 Bad Request'));
         }
