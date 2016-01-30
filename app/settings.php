@@ -2,6 +2,10 @@
 
 return [
     'settings' => [
+        // Slim Settings
+        'determineRouteBeforeAppMiddleware' => false,
+        'displayErrorDetails' => false,
+
         // database settings
         'pdo' => [
             'dsn' => 'mysql:host=localhost;dbname=notes;charset=utf8',
