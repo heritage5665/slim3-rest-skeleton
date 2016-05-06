@@ -34,9 +34,9 @@ $container[App\Repository\NoteRepository::class] = function ($c) {
 };
 
 $container[App\Action\HomeAction::class] = function ($c) {
-    return new App\Action\HomeAction($c->get('logger'));
+    return new HomeAction($c->get('logger'));
 };
 
 $container[App\Action\NotesAction::class] = function ($c) {
-    return new App\Action\NotesAction($c->get('logger'), $c->get(App\Factory\NoteFactory::class), $c->get(App\Repository\NoteRepository::class));
+    return new NotesAction($c->get('logger'), $c->get(App\Factory\NoteFactory::class), $c->get(App\Repository\NoteRepository::class));
 };
