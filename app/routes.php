@@ -5,7 +5,7 @@ use App\Action\NotesAction;
 
 // Routes
 
-$app->get('/', HomeAction::class.':dispatch')
+$app->get('/', App\Action\HomeAction::class)
     ->setName('homepage');
 
 $app->get('/notes', NotesAction::class.':getAllNotes');
