@@ -1,6 +1,5 @@
 <?php
 
-use App\Database;
 use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
 use App\Action\HomeAction;
