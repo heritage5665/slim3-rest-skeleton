@@ -53,9 +53,12 @@ final class NotesAction
 
         $new_note = $this->factory->createNewNote($request->getParsedBody());
         if ($new_note !== false) {
-            $response = $response->withStatus(201)->withHeader('Location', '/notes/'.$new_note->getId())->write(json_encode('201 Created'));
+            $response = $response->withStatus(201)
+                                 ->withHeader('Location', '/notes/'.$new_note->getId())
+                                 ->withJson(array('info' => '201 Created'));
         } else {
-            $response = $response->withStatus(400)->withHeader('Content-Type', 'application/json')->write(json_encode('400 Bad Request'));
+            $response = $response->withStatus(400)
+                                 ->withJson(array('info' => '400 Bad Request'));
         }
 
         return $response;
@@ -72,7 +75,8 @@ final class NotesAction
     {
         $this->logger->info('NotesAction: get all notes');
 
-        $response = $response->withHeader('Content-Type', 'application/json')->write(json_encode($this->repository->getAllNotes()));
+        $notes = $this->repository->getAllNotes();
+        $response = $response->withJson(array('data' => $notes));
 
         return $response;
     }
@@ -90,9 +94,10 @@ final class NotesAction
 
         $note = $this->repository->getNote($args['id']);
         if ($note !== false) {
-            $response = $response->withHeader('Content-Type', 'application/json')->write(json_encode($note));
+            $response = $response->withJson(array('data' => $note));
         } else {
-            $response = $response->withStatus(404)->withHeader('Content-Type', 'application/json')->write(json_encode('404 Not Found'));
+            $response = $response->withStatus(404)
+                                 ->withJson(array('info' => '404 Not Found'));
         }
 
         return $response;
@@ -110,7 +115,7 @@ final class NotesAction
         $this->logger->info('NotesAction: note deleted');
 
         $this->repository->deleteNote($args['id']);
-        $response->write(json_encode('ok'));
+        $response->withJson(array('info' => 'ok'));
 
         return $response;
     }
