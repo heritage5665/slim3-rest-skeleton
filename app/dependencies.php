@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
 use App\Action\HomeAction;
@@ -18,18 +19,22 @@ $container['logger'] = function ($c) {
 };
 
 // Database
-$container['pdo'] = function ($c) {
-    $settings = $c->get('settings')['pdo'];
+$container['db'] = function ($c) {
+    $capsule = new Capsule();
+    $capsule->addConnection($c->get('settings')['db']);
 
-    return new PDO($settings['dsn'], $settings['username'], $settings['password']);
+    //$capsule->setAsGlobal();
+    $capsule->bootEloquent();
+
+    return $capsule;
 };
 
 $container[App\Factory\NoteFactory::class] = function ($c) {
-    return new NoteFactory($c->get('logger'), $c->get('pdo'));
+    return new NoteFactory($c->get('logger'), $c->get('db'));
 };
 
 $container[App\Repository\NoteRepository::class] = function ($c) {
-    return new NoteRepository($c->get('logger'), $c->get('pdo'));
+    return new NoteRepository($c->get('logger'), $c->get('db'));
 };
 
 $container[App\Action\HomeAction::class] = function ($c) {

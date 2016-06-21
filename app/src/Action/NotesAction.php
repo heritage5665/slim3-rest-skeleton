@@ -52,9 +52,9 @@ final class NotesAction
         $this->logger->info('NotesAction: add note');
 
         $new_note = $this->factory->createNewNote($request->getParsedBody());
-        if ($new_note !== false) {
+        if (!empty($new_note)) {
             $response = $response->withStatus(201)
-                                 ->withHeader('Location', '/notes/'.$new_note->getId())
+                                 ->withHeader('Location', '/notes/'.$new_note->id)
                                  ->withJson(array('info' => '201 Created'));
         } else {
             $response = $response->withStatus(400)
@@ -76,7 +76,12 @@ final class NotesAction
         $this->logger->info('NotesAction: get all notes');
 
         $notes = $this->repository->getAllNotes();
-        $response = $response->withJson(array('data' => $notes));
+        if (!empty($notes) && $notes->count() > 0) {
+            $response = $response->withJson(array('data' => $notes));
+        } else {
+            $response = $response->withStatus(404)
+                                 ->withJson(array('info' => '404 Not Found'));
+        }
 
         return $response;
     }
@@ -93,7 +98,7 @@ final class NotesAction
         $this->logger->info('NotesAction: get note');
 
         $note = $this->repository->getNote($args['id']);
-        if ($note !== false) {
+        if (!empty($note)) {
             $response = $response->withJson(array('data' => $note));
         } else {
             $response = $response->withStatus(404)
@@ -114,8 +119,13 @@ final class NotesAction
     {
         $this->logger->info('NotesAction: note deleted');
 
-        $this->repository->deleteNote($args['id']);
-        $response->withJson(array('info' => 'ok'));
+        $count = $this->repository->deleteNote($args['id']);
+        if ($count > 0) {
+            $response = $response->withJson(array('info' => 'ok'));
+        } else {
+            $response = $response->withStatus(404)
+                                 ->withJson(array('info' => '404 Not Found'));
+        }
 
         return $response;
     }

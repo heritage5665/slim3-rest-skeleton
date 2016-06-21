@@ -2,9 +2,9 @@
 
 namespace App\Factory;
 
-use App\Object\Note;
+use App\Models\Note;
 use Psr\Log\LoggerInterface;
-use PDO;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 /**
  * Class NoteFactory.
@@ -17,24 +17,24 @@ class NoteFactory
     private $logger;
 
     /**
-     * @var \PDO
+     * @var \Illuminate\Database\Capsule\Manager
      */
-    private $pdo;
+    private $db;
 
     /**
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \PDO                     $pdo
+     * @param \Psr\Log\LoggerInterface             $logger
+     * @param \Illuminate\Database\Capsule\Manager $db
      */
-    public function __construct(LoggerInterface $logger, PDO $pdo)
+    public function __construct(LoggerInterface $logger, Capsule $db)
     {
         $this->logger = $logger;
-        $this->pdo = $pdo;
+        $this->db = $db;
     }
 
     /**
      * @param array $request_data
      *
-     * @return bool|\App\Object\Note
+     * @return bool|\App\Models\Note
      */
     public function createNewNote($request_data)
     {
@@ -44,10 +44,10 @@ class NoteFactory
             return false;
         }
 
-        $stmt = $this->pdo->prepare('INSERT INTO notes (text) VALUES (:text)');
-        $stmt->bindParam(':text', $request_data['text']);
-        $stmt->execute();
+        $note = new Note();
+        $note->text = $request_data['text'];
+        $note->save();
 
-        return new Note($this->pdo->lastInsertId(), $request_data['text']);
+        return $note;
     }
 }

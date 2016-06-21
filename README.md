@@ -3,19 +3,14 @@
 This is a simple skeleton project for Slim 3 that implements a simple REST API.
 Based on [akrabat's slim3-skeleton](https://github.com/akrabat/slim3-skeleton).
 
+This branch also implments [Eloquent](https://laravel.com/docs/5.2/eloquent) and [Phinx](https://phinx.org/).
+
 ## Create Database
 
-```sql
-CREATE TABLE IF NOT EXISTS `notes` (
-`id` int(11) NOT NULL,
-  `text` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+Add database settings to app/settings.php.
 
-
-ALTER TABLE `notes`
- ADD PRIMARY KEY (`id`);
-
-
-ALTER TABLE `notes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+run:
+```
+vendor/bin/phinx migrate
+vendor/bin/phinx seed:run
 ```

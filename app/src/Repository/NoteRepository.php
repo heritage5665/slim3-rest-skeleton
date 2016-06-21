@@ -2,9 +2,9 @@
 
 namespace App\Repository;
 
-use App\Object\Note;
+use App\Models\Note;
 use Psr\Log\LoggerInterface;
-use PDO;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 /**
  * Class NoteRepository.
@@ -17,71 +17,51 @@ class NoteRepository
     private $logger;
 
     /**
-     * @var \PDO
+     * @var \Illuminate\Database\Capsule\Manager
      */
-    private $pdo;
+    private $db;
 
     /**
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param \PDO                     $pdo
+     * @param \Psr\Log\LoggerInterface             $logger
+     * @param \Illuminate\Database\Capsule\Manager $db
      */
-    public function __construct(LoggerInterface $logger, PDO $pdo)
+    public function __construct(LoggerInterface $logger, Capsule $db)
     {
         $this->logger = $logger;
-        $this->pdo = $pdo;
+        $this->db = $db;
     }
 
     /**
-     * @return array (of \App\Object\Note)
+     * @return array (of \App\Modules\Note)
      */
     public function getAllNotes()
     {
         $this->logger->info('NoteRpository: get all notes');
 
-        $stmt = $this->pdo->prepare('SELECT * FROM notes ORDER BY id ASC');
-        $stmt->execute();
-        $result = array();
-        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $result[] = new Note($row['id'], $row['text']);
-        }
-
-        return $result;
+        return Note::orderBy('id')->get();
     }
 
     /**
      * @param int $id
      *
-     * @return bool|\App\Object\Note
+     * @return null|\App\Models\Note
      */
     public function getNote($id)
     {
         $this->logger->info('NoteRepository: get note');
 
-        $stmt = $this->pdo->prepare('SELECT * FROM notes WHERE id = :id');
-        $id = (int) $id;
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-        if ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            return new Note($row['id'], $row['text']);
-        }
-
-        return false;
+        return Note::find($id);
     }
 
     /**
      * @param int $id
      *
-     * @return bool
+     * @return int
      */
     public function deleteNote($id)
     {
         $this->logger->info('NoteRepository: delete note');
 
-        $stmt = $this->pdo->prepare('DELETE FROM notes WHERE id = :id');
-        $id = (int) $id;
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-
-        return true;
+        return Note::destroy($id);
     }
 }

@@ -7,10 +7,16 @@ return [
         'displayErrorDetails' => false,
 
         // database settings
-        'pdo' => [
-            'dsn' => 'mysql:host=localhost;dbname=notes;charset=utf8',
+        'db' => [
+            'driver' => 'mysql',
+            'host' => '127.0.0.1',
+            'port' => '3306',
+            'database' => 'notes',
             'username' => 'notes',
             'password' => 'notes',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
         ],
 
         // monolog settings
