@@ -24,6 +24,6 @@
         "slim/slim": "^3.0",
         "monolog/monolog": "^1.13",
         "illuminate/database": "^5.2",
-        "robmorgan/phinx": "v0.6.0"
+        "robmorgan/phinx": "v0.6.1"
     }
 }
