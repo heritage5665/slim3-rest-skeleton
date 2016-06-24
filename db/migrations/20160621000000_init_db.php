@@ -12,7 +12,7 @@ class InitDb extends Migration
     {
         $this->schema->create('notes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('text');
+            $table->text('text');
             $table->timestamps();
             $table->softDeletes();
         });
