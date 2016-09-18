@@ -56,7 +56,7 @@ final class NotesAction
             $response = $response->withHeader('Location', '/notes/'.$new_note->getId())
                                  ->withJson(array('info' => 'Created'), 201);
         } else {
-            $response = $response->withJson(array('info' => '400 Bad Request'), 400);
+            $response = $response->withJson(array('info' => 'Bad Request'), 400);
         }
 
         return $response;
