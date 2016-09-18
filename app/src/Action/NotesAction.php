@@ -53,12 +53,10 @@ final class NotesAction
 
         $new_note = $this->factory->createNewNote($request->getParsedBody());
         if ($new_note !== false) {
-            $response = $response->withStatus(201)
-                                 ->withHeader('Location', '/notes/'.$new_note->getId())
-                                 ->withJson(array('info' => '201 Created'));
+            $response = $response->withHeader('Location', '/notes/'.$new_note->getId())
+                                 ->withJson(array('info' => 'Created'), 201);
         } else {
-            $response = $response->withStatus(400)
-                                 ->withJson(array('info' => '400 Bad Request'));
+            $response = $response->withJson(array('info' => '400 Bad Request'), 400);
         }
 
         return $response;
@@ -96,8 +94,7 @@ final class NotesAction
         if ($note !== false) {
             $response = $response->withJson(array('data' => $note));
         } else {
-            $response = $response->withStatus(404)
-                                 ->withJson(array('info' => '404 Not Found'));
+            $response = $response->withJson(array('info' => 'Not Found'), 404);
         }
 
         return $response;
