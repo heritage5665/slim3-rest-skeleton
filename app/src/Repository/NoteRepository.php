@@ -32,7 +32,7 @@ class NoteRepository
     }
 
     /**
-     * @return array (of \App\Modules\Note)
+     * @return array (of \App\Models\Note)
      */
     public function getAllNotes()
     {
