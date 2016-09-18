@@ -29,7 +29,7 @@ final class HomeAction
      * @param \Slim\Http\Response $response
      * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function __invoke(Request $request, Response $response, $args)
     {

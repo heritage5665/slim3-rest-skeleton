@@ -45,7 +45,7 @@ final class NotesAction
      * @param \Slim\Http\Response $response
      * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function addNote(Request $request, Response $response, $args)
     {
@@ -69,7 +69,7 @@ final class NotesAction
      * @param \Slim\Http\Response $response
      * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function getAllNotes(Request $request, Response $response, $args)
     {
@@ -86,7 +86,7 @@ final class NotesAction
      * @param \Slim\Http\Response $response
      * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function getNote(Request $request, Response $response, $args)
     {
@@ -108,7 +108,7 @@ final class NotesAction
      * @param \Slim\Http\Response $response
      * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function deleteNote(Request $request, Response $response, $args)
     {
