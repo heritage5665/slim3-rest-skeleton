@@ -3,8 +3,8 @@
 namespace App\Action;
 
 use Psr\Log\LoggerInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Http\Request;
+use Slim\Http\Response;
 use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
 
@@ -41,9 +41,9 @@ final class NotesAction
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -65,9 +65,9 @@ final class NotesAction
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -82,9 +82,9 @@ final class NotesAction
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
@@ -104,9 +104,9 @@ final class NotesAction
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
      * @return \Psr\Http\Message\ResponseInterface
      */
