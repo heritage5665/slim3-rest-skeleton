@@ -3,8 +3,8 @@
 namespace App\Action;
 
 use Psr\Log\LoggerInterface;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Http\Request;
+use Slim\Http\Response;
 use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
 
@@ -41,11 +41,11 @@ final class NotesAction
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function addNote(Request $request, Response $response, $args)
     {
@@ -53,23 +53,21 @@ final class NotesAction
 
         $new_note = $this->factory->createNewNote($request->getParsedBody());
         if (!empty($new_note)) {
-            $response = $response->withStatus(201)
-                                 ->withHeader('Location', '/notes/'.$new_note->id)
-                                 ->withJson(array('info' => '201 Created'));
+            $response = $response->withHeader('Location', '/notes/'.$new_note->id)
+                                 ->withJson(array('info' => 'Created'), 201);
         } else {
-            $response = $response->withStatus(400)
-                                 ->withJson(array('info' => '400 Bad Request'));
+            $response = $response->withJson(array('info' => 'Bad Request'), 400);
         }
 
         return $response;
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function getAllNotes(Request $request, Response $response, $args)
     {
@@ -79,19 +77,18 @@ final class NotesAction
         if (!empty($notes) && $notes->count() > 0) {
             $response = $response->withJson(array('data' => $notes));
         } else {
-            $response = $response->withStatus(404)
-                                 ->withJson(array('info' => '404 Not Found'));
+            $response = $response->withJson(array('info' => 'Not Found'), 404);
         }
 
         return $response;
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function getNote(Request $request, Response $response, $args)
     {
@@ -101,19 +98,18 @@ final class NotesAction
         if (!empty($note)) {
             $response = $response->withJson(array('data' => $note));
         } else {
-            $response = $response->withStatus(404)
-                                 ->withJson(array('info' => '404 Not Found'));
+            $response = $response->withJson(array('info' => 'Not Found'), 404);
         }
 
         return $response;
     }
 
     /**
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface      $response
-     * @param array                                    $args
+     * @param \Slim\Http\Request  $request
+     * @param \Slim\Http\Response $response
+     * @param array               $args
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return \Slim\Http\Response
      */
     public function deleteNote(Request $request, Response $response, $args)
     {
@@ -123,8 +119,7 @@ final class NotesAction
         if ($count > 0) {
             $response = $response->withJson(array('info' => 'ok'));
         } else {
-            $response = $response->withStatus(404)
-                                 ->withJson(array('info' => '404 Not Found'));
+            $response = $response->withJson(array('info' => 'Not Found'), 404);
         }
 
         return $response;
