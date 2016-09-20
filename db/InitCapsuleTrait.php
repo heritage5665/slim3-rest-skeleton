@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database;
+namespace Database;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -27,7 +27,7 @@ trait InitCapsuleTrait
     {
         date_default_timezone_set('UTC');
 
-        $app_settings = require __DIR__.'/../../settings.php';
+        $app_settings = require __DIR__.'/../app/settings.php';
 
         $this->capsule = new Capsule();
         $this->capsule->addConnection($app_settings['settings']['db']);

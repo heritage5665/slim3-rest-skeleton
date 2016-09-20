@@ -1,10 +1,13 @@
 <?php
 
-use App\Database\Migration;
+use Phinx\Migration\AbstractMigration;
+use Database\InitCapsuleTrait;
 use Illuminate\Database\Schema\Blueprint;
 
-class InitDb extends Migration
+class InitDb extends AbstractMigration
 {
+    use InitCapsuleTrait;
+
     /**
      * Migrate Up.
      */

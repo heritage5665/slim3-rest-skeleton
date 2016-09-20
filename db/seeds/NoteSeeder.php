@@ -1,10 +1,13 @@
 <?php
 
-use App\Database\Seed;
+use Phinx\Seed\AbstractSeed;
+use Database\InitCapsuleTrait;
 use App\Models\Note;
 
-class NoteSeeder extends Seed
+class NoteSeeder extends AbstractSeed
 {
+    use InitCapsuleTrait;
+
     /**
      * Run Method.
      *
