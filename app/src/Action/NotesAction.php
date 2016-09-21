@@ -73,14 +73,12 @@ final class NotesAction
     {
         $this->logger->info('NotesAction: get all notes');
 
+        // getAllNotes always returns a \Illuminate\Database\Eloquent\Collection
+        // We do no further test if this collection is empty just return it.
+        // This means if the Collection is empty we return an empty array as valid result, no 404.
         $notes = $this->repository->getAllNotes();
-        if (!empty($notes) && $notes->count() > 0) {
-            $response = $response->withJson(array('data' => $notes));
-        } else {
-            $response = $response->withJson(array('info' => 'Not Found'), 404);
-        }
 
-        return $response;
+        return $response->withJson(array('data' => $notes));
     }
 
     /**

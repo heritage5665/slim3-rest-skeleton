@@ -32,7 +32,7 @@ class NoteRepository
     }
 
     /**
-     * @return array (of \App\Models\Note)
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getAllNotes()
     {
@@ -44,7 +44,7 @@ class NoteRepository
     /**
      * @param int $id
      *
-     * @return null|\App\Models\Note
+     * @return \App\Models\Note
      */
     public function getNote($id)
     {
