@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Home;
+namespace IntegrationTests\Home;
 
-use Tests\BaseTestCase;
+use IntegrationTests\BaseIntegrationTestCase;
 
-class HomeTest extends BaseTestCase
+class HomeTest extends BaseIntegrationTestCase
 {
     public function testGetHome()
     {

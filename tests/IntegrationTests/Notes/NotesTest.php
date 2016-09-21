@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Notes;
+namespace IntegrationTests\Notes;
 
-use Tests\BaseTestCase;
+use IntegrationTests\BaseIntegrationTestCase;
 use App\Models\Note;
 
-class NotesTest extends BaseTestCase
+class NotesTest extends BaseIntegrationTestCase
 {
     public function testGetNotes()
     {
