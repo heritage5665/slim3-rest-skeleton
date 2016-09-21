@@ -5,9 +5,9 @@ namespace UnitTests\Home;
 use UnitTests\BaseUnitTestCase;
 use Slim\Http\Response;
 use Mockery as m;
-use App\Action\HomeAction;
+use App\Controller\HomeController;
 
-class HomeActionTest extends BaseUnitTestCase
+class HomeControllerTest extends BaseUnitTestCase
 {
     public function tearDown()
     {
@@ -22,9 +22,9 @@ class HomeActionTest extends BaseUnitTestCase
         $logger = m::mock('Psr\Log\LoggerInterface');
         $logger->shouldReceive('info');
 
-        $home_action = new HomeAction($logger);
+        $home_controller = new HomeController($logger);
 
-        $response = $home_action($request, $response, null);
+        $response = $home_controller($request, $response, null);
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertContains('Hello, World!', (string) $response->getBody());

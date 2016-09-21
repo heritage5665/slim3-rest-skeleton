@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Action;
+namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
 /**
- * Class HomeAction.
+ * Class HomeController.
  */
-final class HomeAction
+final class HomeController
 {
     /**
      * @var \Psr\Log\LoggerInterface
@@ -33,7 +33,7 @@ final class HomeAction
      */
     public function __invoke(Request $request, Response $response, $args)
     {
-        $this->logger->info('Home page action dispatched');
+        $this->logger->info('HomeController dispatched');
 
         $response->write('Hello, World!');
 

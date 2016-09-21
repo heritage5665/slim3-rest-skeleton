@@ -3,8 +3,8 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
-use App\Action\HomeAction;
-use App\Action\NotesAction;
+use App\Controller\HomeController;
+use App\Controller\NoteController;
 
 $container = $app->getContainer();
 
@@ -37,10 +37,10 @@ $container[App\Repository\NoteRepository::class] = function ($c) {
     return new NoteRepository($c->get('logger'), $c->get('db'));
 };
 
-$container[App\Action\HomeAction::class] = function ($c) {
-    return new HomeAction($c->get('logger'));
+$container[App\Controller\HomeController::class] = function ($c) {
+    return new HomeController($c->get('logger'));
 };
 
-$container[App\Action\NotesAction::class] = function ($c) {
-    return new NotesAction($c->get('logger'), $c->get(App\Factory\NoteFactory::class), $c->get(App\Repository\NoteRepository::class));
+$container[App\Controller\NoteController::class] = function ($c) {
+    return new NoteController($c->get('logger'), $c->get(App\Factory\NoteFactory::class), $c->get(App\Repository\NoteRepository::class));
 };

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Action;
+namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 use Slim\Http\Request;
@@ -9,9 +9,9 @@ use App\Factory\NoteFactory;
 use App\Repository\NoteRepository;
 
 /**
- * Class NotesAction.
+ * Class NoteController.
  */
-final class NotesAction
+final class NoteController
 {
     /**
      * @var \Psr\Log\LoggerInterface
@@ -49,7 +49,7 @@ final class NotesAction
      */
     public function addNote(Request $request, Response $response, $args)
     {
-        $this->logger->info('NotesAction: add note');
+        $this->logger->info('NoteController: add note');
 
         $new_note = $this->factory->createNewNote($request->getParsedBody());
         if (!empty($new_note)) {
@@ -71,7 +71,7 @@ final class NotesAction
      */
     public function getAllNotes(Request $request, Response $response, $args)
     {
-        $this->logger->info('NotesAction: get all notes');
+        $this->logger->info('NoteController: get all notes');
 
         // getAllNotes always returns a \Illuminate\Database\Eloquent\Collection
         // We do no further test if this collection is empty just return it.
@@ -90,7 +90,7 @@ final class NotesAction
      */
     public function getNote(Request $request, Response $response, $args)
     {
-        $this->logger->info('NotesAction: get note');
+        $this->logger->info('NoteController: get note');
 
         $note = $this->repository->getNote($args['id']);
         if (!empty($note)) {
@@ -111,7 +111,7 @@ final class NotesAction
      */
     public function deleteNote(Request $request, Response $response, $args)
     {
-        $this->logger->info('NotesAction: note deleted');
+        $this->logger->info('NoteController: note deleted');
 
         $count = $this->repository->deleteNote($args['id']);
         if ($count > 0) {
